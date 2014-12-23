@@ -1,0 +1,17 @@
+TODO SHOGI
+
+Priorité :
+-Gestion des promotions !!!!
+-Gestion début de partie
+-Gestion fin de partie
+-Déplacements tour, fous et leurs promotions et chariot
+-Détection des echecs
+-Règle impossible de mater en parachutant un pion
+
+
+Pas prio :
+
+-partie en temps limité
+-handicaps
+-sauvegardes
+-mode sandbox
