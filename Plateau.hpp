@@ -22,7 +22,7 @@ class Plateau
 		void capture(Pion&,int,int,int);
 		void parachutage(Pion&,int,int);
 		Pion getPion(int,int);
-		Plateau();
+		//Plateau();
 		
 };
 #endif
