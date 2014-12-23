@@ -24,7 +24,7 @@ int Moteur::mouvement(Pion& pion, int x_fin, int y_fin)
 {	
 	if((testMouvement(pion,x_fin,y_fin)) == 0) //si mouvement légal
 	{
-		if(plat_mot.hasPion(x_fin,y_fin)) //mais si case déjà occupée
+		if(plat_mot.plateau[x_fin,y_fin]!=NULL) //mais si case déjà occupée
 			attaque(pion,x_fin,y_fin); //mener attaque
 		else //sinon déplacement normal
 		{
