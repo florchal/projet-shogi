@@ -37,14 +37,6 @@ void Plateau::capture(Pion& pion, int x_cap, int y_cap, int preneur){
 	}
 }
 	
-bool Plateau::hasPion(int x,int y){
-	if(plateau[x][y]==NULL)
-		return false;
-	else return true;
-	
-}	
-	
-	
 Pion Plateau::getPion(int x, int y){
 	return *plateau[x][y];
 }
