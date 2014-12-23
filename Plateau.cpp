@@ -18,10 +18,6 @@ void Plateau::parachutage(Pion& pion, int x_fin, int y_fin)
 	plateau[x_fin][y_fin]=&pion;
 }
 
-
-
-
-
 void Plateau::setPosition(Pion& pion, int x_fin, int y_fin){
 	plateau[x_fin][y_fin]=&pion;
 }
@@ -36,7 +32,7 @@ void Plateau::capture(Pion& pion, int x_cap, int y_cap, int preneur){
 		joueur2.push_back(pion);
 	}
 }
-	
+		
 Pion Plateau::getPion(int x, int y){
 	return *plateau[x][y];
 }
