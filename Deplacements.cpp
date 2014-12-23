@@ -3,56 +3,56 @@
 
 
 //----------------Test Généraux d'or et pions promus--------------------
-int testGeneralOr_J1(int x_init, int y_init, int x, int y){	
-	if((x==x_init) && (y==y_init+1))
+int testGeneralOr_J2(int x_init, int y_init, int x, int y){	
+	if((x==x_init) && (y==y_init+1)) //case avant J2
 	{
 		return 0;
 	}
-	else if((x==x_init+1) && (y==y_init+1))
+	else if((x==x_init+1) && (y==y_init+1)) //diagonale avant gauche J2
 	{
 		return 0;
 	}
-	else if((x==x_init-1) && (y==y_init+1))
+	else if((x==x_init-1) && (y==y_init+1)) //diagonale avant droite J2
 	{
 		return 0;
 	}		
-	else if((x==x_init-1) && (y==y_init))
+	else if((x==x_init-1) && (y==y_init)) //directement a droite J2
 	{
 		return 0;
 	}		
-	else if((x==x_init+1) && (y==y_init))
+	else if((x==x_init+1) && (y==y_init)) // Directement a gauche J2
 	{
 		return 0;
 	}		
-	else if((x==x_init) && (y==y_init-1))
+	else if((x==x_init) && (y==y_init-1)) //case arriere J2
 	{
 		return 0;
 	}		
 	else return -1; //déplacement invalide
 }
 
-int testGeneralOr_J2(int x_init, int y_init, int x, int y){	
-	if((x==x_init) && (y==y_init+1))
+int testGeneralOr_J1(int x_init, int y_init, int x, int y){	
+	if((x==x_init) && (y==y_init+1)) //case arriere J1
 	{
 		return 0;
 	}
-	else if((x==x_init+1) && (y==y_init-1))
+	else if((x==x_init+1) && (y==y_init-1)) //diagonale avant droite J1
 	{
 		return 0;
 	}
-	else if((x==x_init-1) && (y==y_init-1))
+	else if((x==x_init-1) && (y==y_init-1)) //diagonale avant gauche J1
 	{
 		return 0;
 	}		
-	else if((x==x_init-1) && (y==y_init))
+	else if((x==x_init-1) && (y==y_init)) //case gauche J1
 	{
 		return 0;
 	}		
-	else if((x==x_init+1) && (y==y_init))
+	else if((x==x_init+1) && (y==y_init))//case droite J1
 	{
 		return 0;
 	}		
-	else if((x==x_init) && (y==y_init-1))
+	else if((x==x_init) && (y==y_init-1))//case avant J1
 	{
 		return 0;
 	}		
@@ -102,64 +102,52 @@ int testGeneral(int x_init, int y_init, int x, int y){
 
 
 //----------------------Test Généraux d'argent--------------------------
-int testGeneralArgent_J1(int x_init, int y_init, int x, int y){	
-	if((x==x_init) && (y==y_init+1))
+int testGeneralArgent_J2(int x_init, int y_init, int x, int y){	
+	if((x==x_init) && (y==y_init+1)) //case avant J2
 	{
 		return 0;
 	}
-	else if((x==x_init+1) && (y==y_init+1))
+	else if((x==x_init+1) && (y==y_init+1)) //diagonale avant gauche J2
 	{
 		return 0;
 	}
-	else if((x==x_init-1) && (y==y_init+1))
+	else if((x==x_init-1) && (y==y_init+1))//diagonale avant droite J2
 	{
 		return 0;
-	}		
-	else if((x==x_init-1) && (y==y_init))
-	{
-		return 0;
-	}		
-	else if((x==x_init+1) && (y==y_init))
-	{
-		return 0;
-	}		
-	else if((x==x_init-1) && (y==y_init-1))
+	}				
+	else if((x==x_init-1) && (y==y_init-1))//diagonale arriere droite J2
 	{
 		return 0;
 	}
-	else if((x==x_init+1) && (y==y_init-1))
+	else if((x==x_init+1) && (y==y_init-1))// Diagonale arriere gauche J2
 	{
 		return 0;
 	}						
 	else return -1; //déplacement invalide
 }
 
-int testGeneralArgent_J2(int x_init, int y_init, int x, int y){	
+int testGeneralArgent_J1(int x_init, int y_init, int x, int y){	
 
-	if((x==x_init+1) && (y==y_init+1))
+	if((x==x_init+1) && (y==y_init+1)) //diagonale arriere droite J1
 	{
 		return 0;
 	}
-	else if((x==x_init-1) && (y==y_init+1))
+	else if((x==x_init-1) && (y==y_init+1))//diagonale arriere gauche J1
 	{
 		return 0;
-	}		
-	else if((x==x_init-1) && (y==y_init))
-	{
-		return 0;
-	}		
-	else if((x==x_init+1) && (y==y_init))
-	{
-		return 0;
-	}		
-	else if((x==x_init-1) && (y==y_init-1))
+	}			
+	else if((x==x_init-1) && (y==y_init-1))//diagonale avant droite J1
 	{
 		return 0;
 	}
-	else if((x==x_init+1) && (y==y_init-1))
+	else if((x==x_init+1) && (y==y_init-1))//diagonale avant gauche J1
 	{
 		return 0;
-	}						
+	}		
+	else if((x==x_init) && (y==y_init-1))//case avant J1
+	{
+		return 0;
+	}			
 	else return -1; //déplacement invalide
 }
 //----------------------------------------------------------------------
@@ -167,7 +155,7 @@ int testGeneralArgent_J2(int x_init, int y_init, int x, int y){
 
 
 //----------------------Test Soldats----------------------------------
-int testSoldat_J1(int x_init, int y_init, int x, int y){
+int testSoldat_J2(int x_init, int y_init, int x, int y){
 	if((x==x_init) && (y==y_init+1))
 	{
 		return 0;
@@ -176,7 +164,7 @@ int testSoldat_J1(int x_init, int y_init, int x, int y){
 	else return -1; //déplacement invalide
 }
 
-int testSoldat_J2(int x_init, int y_init, int x, int y){
+int testSoldat_J1(int x_init, int y_init, int x, int y){
 	if((x==x_init) && (y==y_init-1))
 	{
 		return 0;
@@ -188,7 +176,7 @@ int testSoldat_J2(int x_init, int y_init, int x, int y){
 
 
 //----------------------Test Cavaliers----------------------------------
-int testCavalier_J1(int x_init, int y_init, int x, int y){
+int testCavalier_J2(int x_init, int y_init, int x, int y){
 	if((x==x_init+1)&&(y==y_init+2))
 	{
 		return 0;
@@ -200,7 +188,7 @@ int testCavalier_J1(int x_init, int y_init, int x, int y){
 	else return -1;
 }
 
-int testCavalier_J2(int x_init, int y_init, int x, int y){
+int testCavalier_J1(int x_init, int y_init, int x, int y){
 	if((x==x_init+1)&&(y==y_init-2))
 	{
 		return 0;
@@ -317,7 +305,7 @@ int testParachutage(Pion& pion, int x_fin, int y_fin, int joueur_actif, Plateau 
 	
 	if(pion.getNom()==Soldat) //vérification qu'il n'y a pas deux soldats non promus dans la même colonne
 	{
-		for(int i = 0; i++; i<9)
+		for(int i = 0; i<9;i++)
 		{
 			if((plateau.getPion(x_fin,i).getNom()==Soldat)&&(plateau.getPion(x_fin,i).getProprietaire()==joueur_actif))
 				return -1;
