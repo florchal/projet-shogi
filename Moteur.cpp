@@ -1,5 +1,5 @@
 #include "Moteur.hpp"
-
+#include <stdio.h>
 
 
 
@@ -11,7 +11,7 @@ int Moteur::attaque(Pion& pion, int x_fin, int y_fin)
 	else 
 	{
 		plat_mot.getPion(x_fin,y_fin).setPromotion(false); //dépromouvoir le pion capturé
-		plat_mot.getPion(x_fin,y_fin).setPosition(NULL,NULL); //supprimer ses coordonnées dans la classe pion
+		plat_mot.getPion(x_fin,y_fin).retirerPion(); //supprimer ses coordonnées dans la classe pion
 		plat_mot.capture(pion, x_fin, y_fin, joueur_actif); //appel a la fonction capture propre au plateau, ce qui ajoute le pion a la liste des pions capturés et le retire du plateau
 		plat_mot.setPosition(pion,x_fin,y_fin); //place le pion en mouvement à la position voulue sur le plateau
 		pion.setPosition(x_fin, y_fin);//met à jour les coordonnées finales dans la classe pion
@@ -86,61 +86,55 @@ int Moteur::coup(int x_init, int y_init, int x_fin, int y_fin) //gère tous les 
 Moteur::Moteur(){
 	
 	bool partie_active = true;
-	Plateau plateau_jeu;
+	Plateau plateau_jeu = Plateau();
+	printf("plauteau initialisé\n");
 	int joueur_actif=1;
-	for(int i=0;i<9;i++)
-	{
-		for(int j=0;j<9;j++)
-		{
-			plateau_jeu.plateau[i][j]=NULL;
-		}
-	}
+
 	//----------------------------------------------------------
 	for(int i = 0; i < 9; i++) //création des soldats du joueur 1
 	{
-
-		Pion(i,6,1,Soldat,true);
-
+		plat_mot.plateau[i][6]= new Pion(i,6,1,Soldat,true);
 	}
 	for(int i = 0; i < 9; i++) //création des soldats du joueur 2
 	{
-		Pion(i,2,2,Soldat,true);
+		plat_mot.plateau[i][2]= new Pion(i,2,2,Soldat,true);
 	}
 	//----------------------------------------------------------
 	//création des tours
-	Pion(7,7,1,Tour,true);
-	Pion(1,1,2,Tour,true);
+	plat_mot.plateau[7][7]= new Pion(7,7,1,Tour,true);
+	plat_mot.plateau[1][1]= new Pion(1,1,2,Tour,true);
 
 	//création des fous
-	Pion(1,7,1,Fou,true);
-	Pion(7,1,2,Fou,true); 
+	plat_mot.plateau[1][7]=new Pion(1,7,1,Fou,true);
+	plat_mot.plateau[7][1]=new Pion(7,1,2,Fou,true); 
 
 	//création des Generaux
-	Pion(4,8,1,General,true);
-	Pion(4,0,2,General_Jade,true);
+	plat_mot.plateau[4][8]=new Pion(4,8,1,General,true);
+	plat_mot.plateau[4][0]=new Pion(4,0,2,General_Jade,true);
 
 	//création des Generaux d'or
-	Pion(3,8,1,Gen_or,true);//J1
-	Pion(5,8,1,Gen_or,true);
-	Pion(3,0,2,Gen_or,true);//J2
-	Pion(5,0,2,Gen_or,true);
+	plat_mot.plateau[3][8]=new Pion(3,8,1,Gen_or,true);//J1
+	plat_mot.plateau[5][8]=new Pion(5,8,1,Gen_or,true);
+	plat_mot.plateau[3][0]=new Pion(3,0,2,Gen_or,true);//J2
+	plat_mot.plateau[5][0]=new Pion(5,0,2,Gen_or,true);
 	
 	//création des Generaux d'argent
-	Pion(2,8,1,Gen_arg,true);//J1
-	Pion(6,8,1,Gen_arg,true);
-	Pion(2,0,2,Gen_arg,true);//J2
-	Pion(6,0,2,Gen_arg,true);
+	plat_mot.plateau[2][8]=new Pion(2,8,1,Gen_arg,true);//J1
+	plat_mot.plateau[6][8]=new Pion(6,8,1,Gen_arg,true);
+	plat_mot.plateau[2][0]=new Pion(2,0,2,Gen_arg,true);//J2
+	plat_mot.plateau[6][0]=new Pion(6,0,2,Gen_arg,true);
 	
 	//création des Cavaliers
-	Pion(1,8,1,Cavalier,true);//J1
-	Pion(7,8,1,Cavalier,true);
-	Pion(1,0,2,Cavalier,true);//J2
-	Pion(7,0,2,Cavalier,true);
+	plat_mot.plateau[1][8]=new Pion(1,8,1,Cavalier,true);//J1
+	plat_mot.plateau[7][8]=new Pion(7,8,1,Cavalier,true);
+	plat_mot.plateau[1][0]=new Pion(1,0,2,Cavalier,true);//J2
+	plat_mot.plateau[7][0]=new Pion(7,0,2,Cavalier,true);
 	
 	//création des Chariot
-	Pion(0,8,1,Chariot,true);//J1
-	Pion(8,8,1,Chariot,true);
-	Pion(0,0,2,Chariot,true);//J2
-	Pion(8,0,2,Chariot,true);
+	plat_mot.plateau[0][8]=new Pion(0,8,1,Chariot,true);//J1
+	plat_mot.plateau[8][8]=new Pion(8,8,1,Chariot,true);
+	plat_mot.plateau[0][0]=new Pion(0,0,2,Chariot,true);//J2
+	plat_mot.plateau[8][0]=new Pion(8,0,2,Chariot,true);
 	//-------------------------------------------------------
+	printf("fin creation moteur\n");
 }
