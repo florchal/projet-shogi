@@ -16,7 +16,6 @@ class Pion {
 		bool promu;
 		int positionx;
 		int positiony;
-		//int id; //identifiant unique de la piece
 		int proprietaire;//1 pour joueur 1, 2 pour joueur 2
 		bool vivant; //true si sur plateau, false sinon
 		
@@ -25,7 +24,6 @@ class Pion {
 		void setNom(int);
 		void setPromotion(bool);
 		void setPosition(int,int);
-		//void setId(int);
 		void setVivant(bool);
 		void setProprietaire(int);
 		int getNom();
@@ -35,7 +33,7 @@ class Pion {
 		int getId();
 		bool getVivant();
 		int getProprietaire();
-		Pion();
+		void retirerPion();
 		Pion(int, int, int, int,bool);
 };
 #endif
