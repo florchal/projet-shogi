@@ -11,12 +11,13 @@
 
 
 class Moteur{
+	public:
+		Plateau plat_mot;
 	
 	private:
 		bool partie_active;
 		int joueur_actif;
-		Plateau plat_mot;
-
+		
 	public:
 		int mouvement(Pion&,int,int);
 		int coup(int,int,int,int); 
