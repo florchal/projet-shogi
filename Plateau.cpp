@@ -1,16 +1,16 @@
 #include "Plateau.hpp"
+#include <stdio.h>
 
-
-/*Plateau::Plateau(){
+Plateau::Plateau(){
 	
 	for(int i=0;i<9;i++)
 	{
 		for(int j=0;j<9;j++)
 		{
-			plateau[i][j] = Pion::Pion(i,j);
+			plateau[i][j] = NULL;
 		}
 	}
-}*/
+}
 
 void Plateau::parachutage(Pion& pion, int x_fin, int y_fin)
 {
