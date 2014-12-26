@@ -1,19 +1,8 @@
-
-
 #include "Pion.hpp"
-
-Pion::Pion(){
-	nom = Case_vide;
-	//id = 0;
-	promu = 0;
-	proprietaire = 0;
-	vivant = false;
-}
 
 Pion::Pion(int x, int y, int prop, int name, bool viv){ //Constructeur
 	positionx = x;
 	positiony = y;
-	//id = identifiant; // mis à 0 si la case est vide
 	proprietaire = prop;
 	nom = name;
 	vivant = viv;
@@ -22,7 +11,6 @@ Pion::Pion(int x, int y, int prop, int name, bool viv){ //Constructeur
 void Pion::setPion(int x, int y, int prop, int name,bool viv){ //Constructeur
 	positionx = x;
 	positiony = y;
-	//id = identifiant; // mis à 0 si la case est vide
 	proprietaire = prop;
 	nom = name;
 	vivant = viv;
@@ -40,10 +28,6 @@ void Pion::setPosition(int x, int y){
 	positionx = x;
 	positiony = y;
 }
-
-/*void Pion::setId(int identifiant){
-	id = identifiant;
-}*/
 
 void Pion::setVivant(bool vivant){
 	vivant = vivant;
@@ -70,10 +54,6 @@ int Pion::getPositiony(){
 	return positiony;
 }
 
-/*int Pion::getId(){
-	return id;
-}*/
-
 bool Pion::getVivant(){
 	return vivant;
 }
@@ -81,4 +61,8 @@ bool Pion::getVivant(){
 int Pion::getProprietaire(){
 	return proprietaire;
 }
-		
+	
+void Pion::retirerPion(){
+	positionx = 100;
+	positiony = 100;
+}	
