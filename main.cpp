@@ -11,10 +11,10 @@
 	
 int main()
 {
-	printf("début main\n");
+	std::cout<<"début main\n";
 	Moteur mot = Moteur();
 	int x_init, y_init,x_fin,y_fin;
-	printf("init moteur ok\n");
+	std::cout<<"init moteur ok\n";
 	
 	while(1)
 	{
@@ -25,27 +25,35 @@ int main()
 				if(mot.plat_mot.plateau[x][y]!=NULL)
 				{
 					if(mot.plat_mot.plateau[x][y]->getNom()==Soldat)
-						printf("P ");
+						std::cout<<"P ";
 					else if((mot.plat_mot.plateau[x][y]->getNom()==General)||(mot.plat_mot.plateau[x][y]->getNom()==General_Jade))
-						printf("G ");
+						std::cout<<"G ";
 					else if(mot.plat_mot.plateau[x][y]->getNom()==Gen_arg)
-						printf("A ");
+						std::cout<<"A ";
 					else if(mot.plat_mot.plateau[x][y]->getNom()==Gen_or)
-						printf("O ");
+						std::cout<<"O ";
 					else if(mot.plat_mot.plateau[x][y]->getNom()==Chariot)
-						printf("L ");
+						std::cout<<"L ";
 					else if(mot.plat_mot.plateau[x][y]->getNom()==Cavalier)
-						printf("C ");
+						std::cout<<"C ";
 					else if(mot.plat_mot.plateau[x][y]->getNom()==Fou)
-						printf("F ");
+						std::cout<<"F ";
 					else if(mot.plat_mot.plateau[x][y]->getNom()==Tour)
-						printf("T ");
+						std::cout<<"T ";
 				}
-				else printf("_ ");
+				else std::cout<<"_ ";
 			}
-			printf("\n");
+			std::cout<<"\n";
 		}	
-		if((mot.coup(scanf("%d",&x_init),scanf("%d",&y_init), scanf("%d",&x_fin),scanf("%d",&y_fin)))==-1)
-					printf("coup non autorisé\n");
+		std::cin>>x_init;
+		std::cin.clear();
+		std::cin>>y_init;
+		std::cin.clear();
+		std::cin>>x_fin;
+		std::cin.clear();
+		std::cin>>y_fin;
+		std::cin.clear();		
+		mot.coup(x_init,y_init,x_fin,y_fin);
+	//mot.coup(8,8,8,7);
 	}
 }
