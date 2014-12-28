@@ -88,7 +88,7 @@ Moteur::Moteur(){
 	bool partie_active = true;
 	Plateau plat_jeu = Plateau();
 	printf("plateau initialisé\n");
-	//int joueur_actif=1; // a quoi sert cette init ? 
+	this->joueur_actif=1 ; // je pense que ca ca devrait marcher. 
 	
 	//----------------------------------------------------------
 	for(int i = 0; i < 9; i++) //création des soldats du joueur 1
