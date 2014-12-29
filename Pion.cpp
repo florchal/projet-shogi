@@ -7,6 +7,15 @@ Pion::Pion(int x, int y, int prop, int name, bool viv){ //Constructeur
 	nom = name;
 	vivant = viv;
 }
+
+/*Pion::Pion(Pion& pion){ //Constructeur
+	positionx = pion.getPositionx();
+	positiony = pion.getPositiony();
+	proprietaire = pion.getProprietaire();
+	nom = pion.getNom();
+	vivant = pion.getVivant();
+	promu =pion.getPromotion();
+}*/
 //setters
 void Pion::setPion(int x, int y, int prop, int name,bool viv){ //Constructeur
 	positionx = x;
@@ -30,7 +39,7 @@ void Pion::setPosition(int x, int y){
 }
 
 void Pion::setVivant(bool vivant){
-	vivant = vivant;
+	this->vivant = vivant;
 }
 
 void Pion::setProprietaire(int prop){
@@ -57,12 +66,12 @@ int Pion::getPositiony(){
 bool Pion::getVivant(){
 	return vivant;
 }
-	
+
 int Pion::getProprietaire(){
 	return proprietaire;
 }
-	
+
 void Pion::retirerPion(){
 	positionx = 100;
 	positiony = 100;
-}	
+}
