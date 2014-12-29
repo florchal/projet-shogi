@@ -26,7 +26,8 @@
 	int testGeneralArgent_J2(int,int,int,int);
 	int testParachutage(Pion&,int,int,int,Plateau);
 	int testTour(int,int,int,int);
+	int testTourPromue(int,int,int,int);
+	int testFou(int,int,int,int);
+	int testFouPromu(int,int,int,int);
 	
-	
-
 #endif
