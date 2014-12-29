@@ -60,8 +60,6 @@ int testGeneralOr_J1(int x_init, int y_init, int x, int y){
 }
 //----------------------------------------------------------------------
 
-
-
 //-----------------Test Général et Général de jade----------------------
 int testGeneral(int x_init, int y_init, int x, int y){	
 	if((x==x_init) && (y==y_init+1))
@@ -99,7 +97,6 @@ int testGeneral(int x_init, int y_init, int x, int y){
 	else return -1; //déplacement invalide
 }
 //----------------------------------------------------------------------
-
 
 //----------------------Test Généraux d'argent--------------------------
 int testGeneralArgent_J2(int x_init, int y_init, int x, int y){	
@@ -152,8 +149,6 @@ int testGeneralArgent_J1(int x_init, int y_init, int x, int y){
 }
 //----------------------------------------------------------------------
 
-
-
 //----------------------Test Soldats----------------------------------
 int testSoldat_J2(int x_init, int y_init, int x, int y){
 	if((x==x_init) && (y==y_init+1))
@@ -173,7 +168,6 @@ int testSoldat_J1(int x_init, int y_init, int x, int y){
 	else return -1; //déplacement invalide
 }
 //----------------------------------------------------------------------
-
 
 //----------------------Test Cavaliers----------------------------------
 int testCavalier_J2(int x_init, int y_init, int x, int y){
@@ -202,11 +196,104 @@ int testCavalier_J1(int x_init, int y_init, int x, int y){
 //----------------------------------------------------------------------
 
 
-int testTour(int x_init, int y_init, int x, int y){
-	
+int testTour(int x_init, int y_init, int x_fin, int y_fin){
+	/*if((y_init==y_fin)&&(x_init<x_fin)) //horizontal vers la droite
+	{
+		for(int x=x_init+1;x<=x_fin-1;x++)
+		{
+			if(plateau[x][y_fin]!=NULL)
+				return -1;
+		}
+	}
+	else if((y_init==y_fin)&&(x_init>x_fin)) //horizontal vers la gauche
+	{
+		for(int x=x_init-1;x>=x_fin+1;x--)
+		{
+			if(plateau[x][y_fin]!=NULL)
+				return -1;
+		}
+	}
+	else if((x_init==x_fin)&&(y_init>y_fin)) //vertical vers le haut
+	{
+		for(int y=y_init-1;y>=y_fin+1;y--)
+		{
+			if(plateau[x_init][y]!=NULL)
+				return -1;
+		}
+	}
+	else if((x_init==x_fin)&&(y_init<y_fin)) //vertical vers le bas
+	{
+		for(int y=y_init+1;y<=y_fin-1;y++)
+		{
+			if(plateau[x_init][y]!=NULL)
+				return -1;
+		}
+	}	
+	else
+	return 0;*/
+}
+
+int testFou(int x_init, int y_init, int x_fin, int y_fin){
+	/*if((y_init<y_fin)&&(x_init<x_fin))//diagonale bas droite
+	{
+		for(int k=x_init+1;k<=x_fin-1;k++)
+		{
+			if(plateau[x_init+k][y_init+k]!=NULL)
+				return -1;
+		}
+	}
+	else if((y_init<y_fin)&&(x_init>x_fin)) //diagonale bas gauche
+	{
+		for(int k=y_init+1;k<=y_fin-1;k++)
+		{
+			if(plateau[x_init-k][y_init+k]!=NULL)
+				return -1;
+		}
+	}
+	else if((x_init>x_fin)&&(y_init>y_fin))//diagonale haut gauche
+	{
+		for(int k=y_init-1;k>=y_fin+1;k--)
+		{
+			if(plateau[x_init-k][y_init-k]!=NULL)
+				return -1;
+		}
+	}
+	else if((x_init<x_fin)&&(y_init>y_fin))//diagonale haut droite
+	{
+		for(int k=x_init+1;k<=x_fin-1;k++)
+		{
+			if(plateau[x_init+k][y_init-k]!=NULL)
+				return -1;
+		}
+	}	
+	else
+	return 0;*/
 	
 }
 
+int testFouPromu(int x_init, int y_init, int x_fin, int y_fin){
+	if((x_fin==x_init+1)&&(y_fin==y_init))
+		return 0;
+	else if((x_fin==x_init-1)&&(y_fin==y_init))
+		return 0;
+	else if((x_fin==x_init)&&(y_fin==y_init+1))
+		return 0;
+	else if((x_fin==x_init)&&(y_fin==y_init-1))
+		return 0;
+	else testFou( x_init, y_init, x_fin, y_fin);
+}
+
+int testTourPromue(int x_init, int y_init, int x_fin, int y_fin){
+	if((x_fin==x_init+1)&&(y_fin==y_init+1))
+		return 0;
+	else if((x_fin==x_init-1)&&(y_fin==y_init-1))
+		return 0;
+	else if((x_fin==x_init-1)&&(y_fin==y_init+1))
+		return 0;
+	else if((x_fin==x_init+1)&&(y_fin==y_init-1))
+		return 0;
+	else testTour(x_init, y_init, x_fin, y_fin);
+}
 
 int testMouvement(Pion& pion, int x_fin, int y_fin){
 	
@@ -221,64 +308,83 @@ int testMouvement(Pion& pion, int x_fin, int y_fin){
 		else if(proprietaire==2)
 			testSoldat_J2(x_init,y_init,x_fin,y_fin);
 		break;
+		
 		case Chariot:		//Chariot
 		break;
+		
 		case Cavalier:		//Cavalier
 		if(proprietaire==1)
 			testCavalier_J1(x_init,y_init,x_fin,y_fin);
 		else if(proprietaire==2)
 			testCavalier_J2(x_init,y_init,x_fin,y_fin);
 		break;
+		
 		case Gen_arg:		//Gen_arg
 		if(proprietaire==1)
 			testGeneralArgent_J1(x_init, y_init, x_fin, y_fin);
 		else if(proprietaire==2)
 			testGeneralArgent_J2(x_init, y_init, x_fin, y_fin);
 		break;
+		
 		case Gen_or:		//Gen_or
 		if(proprietaire==1)
 			testGeneralOr_J1(x_init, y_init, x_fin, y_fin);
 		else if(proprietaire==2)
 			testGeneralOr_J2(x_init, y_init, x_fin, y_fin);
 		break;
+		
 		case General:		//General
-		testGeneral(x_init, y_init, x_fin,y_fin);
+			testGeneral(x_init, y_init, x_fin,y_fin);
 		break;
+		
 		case Fou:		//Fou
+			testFou(x_init, y_init, x_fin,y_fin);
 		break;
+		
 		case Tour:		//Tour
+			testTour(x_init, y_init, x_fin,y_fin);
 		break;
+		
 		case Soldat_p:		//Soldat promu
 		if(proprietaire==1)
 			testGeneralOr_J1(x_init, y_init, x_fin, y_fin);
 		else if(proprietaire==2)
 			testGeneralOr_J2(x_init, y_init, x_fin, y_fin);
 		break;
+		
 		case Chariot_p:	//Chariot promu
 		if(proprietaire==1)
 			testGeneralOr_J1(x_init, y_init, x_fin, y_fin);
 		else if(proprietaire==2)
 			testGeneralOr_J2(x_init, y_init, x_fin, y_fin);
 		break;
+		
 		case Cavalier_p:	//Cavalier promu
 		if(proprietaire==1)
 			testGeneralOr_J1(x_init, y_init, x_fin, y_fin);
 		else if(proprietaire==2)
 			testGeneralOr_J2(x_init, y_init, x_fin, y_fin);
 		break;
+		
 		case Gen_arg_p:	//General d'argent promu
 		if(proprietaire==1)
 			testGeneralOr_J1(x_init, y_init, x_fin, y_fin);
 		else if(proprietaire==2)
 			testGeneralOr_J2(x_init, y_init, x_fin, y_fin);
 		break;
+		
 		case Fou_p:	//Fou promu
+			testFouPromu(x_init,y_init, x_fin, y_fin);
 		break;
+		
 		case Tour_p:	//Tour promue
+			testTourPromue(x_init,y_init, x_fin, y_fin);
 		break;
+		
 		case General_Jade:	//General de jade
-		testGeneral(x_init, y_init, x_fin,y_fin);
+			testGeneral(x_init, y_init, x_fin,y_fin);
 		break;
+		
 		default:
 		return -1;
 		break;
