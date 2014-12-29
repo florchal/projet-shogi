@@ -87,36 +87,38 @@ void Moteur::changer_joueur(){
 }*/
 int Moteur::coup(int x_init, int y_init, int x_fin, int y_fin) //gère tous les coups joués
 {
-	Pion pion = plat_mot.getPion(x_init,y_init);
-	if((plat_mot.plateau[x_init][y_init]!=NULL)&&(pion.getProprietaire()==joueur_actif))
+	if(plat_mot.plateau[x_init][y_init]!=NULL)//si on ne clique pas sur une case vide
 	{
-		if(!pion.getVivant()) //si on cherche à bouger un pion mort on veut parachuter
+		Pion pion = plat_mot.getPion(x_init,y_init);
+		if(pion.getProprietaire()==joueur_actif)
 		{
-			parachutage(pion,x_fin,y_fin); 
-			changer_joueur();
-			return 0;
-		}
-		else if(pion.getVivant()) //si on cherche à bouger un pion vivant c'est un déplacement normal
-		{
-			if(mouvement(pion,x_fin,y_fin)!=-1) //Déplacer le pion (return -1 si coup invalide)
+			if(!pion.getVivant()) //si on cherche à bouger un pion mort on veut parachuter
 			{
-				plat_mot.plateau[x_init][y_init]=NULL;
-				if(joueur_actif==1)
-					joueur_actif=2;
-				else
-					joueur_actif=1;
+				parachutage(pion,x_fin,y_fin); 
+				changer_joueur();
 				return 0;
 			}
+			else if(pion.getVivant()) //si on cherche à bouger un pion vivant c'est un déplacement normal
+			{
+				if(mouvement(pion,x_fin,y_fin)!=-1) //Déplacer le pion (return -1 si coup invalide)
+				{
+					plat_mot.plateau[x_init][y_init]=NULL;
+					if(joueur_actif==1)
+						joueur_actif=2;
+					else
+						joueur_actif=1;
+					return 0;
+				}
+				else 
+					return -1;
+				
+			}
 			else 
+			{
 				return -1;
-			
-		}
-		else 
-		{
-			return -1;
-		}
-	}	
-	
+			}
+		}	
+	}
 }
 
 Moteur::Moteur(){
