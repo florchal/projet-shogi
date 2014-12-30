@@ -195,82 +195,82 @@ int testCavalier_J1(int x_init, int y_init, int x, int y){
 //----------------------------------------------------------------------
 
 
-int testTour(int x_init, int y_init, int x_fin, int y_fin){
-	/*if((y_init==y_fin)&&(x_init<x_fin)) //horizontal vers la droite
+int testTour(int x_init, int y_init, int x_fin, int y_fin, Plateau plat){
+	if((y_init==y_fin)&&(x_init<x_fin)) //horizontal vers la droite
 	 {
-	 for(int x=x_init+1;x<=x_fin-1;x++)
-	 {
-	 if(plateau[x][y_fin]!=NULL)
-	 return -1;
-	 }
+		 for(int x=x_init+1;x<=x_fin-1;x++)
+		 {
+			 if((plat.plateau[x][y_fin])!=NULL)
+				return -1;
+		 }
 	 }
 	 else if((y_init==y_fin)&&(x_init>x_fin)) //horizontal vers la gauche
 	 {
-	 for(int x=x_init-1;x>=x_fin+1;x--)
-	 {
-	 if(plateau[x][y_fin]!=NULL)
-	 return -1;
-	 }
+		 for(int x=x_init-1;x>=x_fin+1;x--)
+		 {
+			 if(plat.plateau[x][y_fin]!=NULL)
+				return -1;
+		 }
 	 }
 	 else if((x_init==x_fin)&&(y_init>y_fin)) //vertical vers le haut
 	 {
-	 for(int y=y_init-1;y>=y_fin+1;y--)
-	 {
-	 if(plateau[x_init][y]!=NULL)
-	 return -1;
-	 }
+		 for(int y=y_init-1;y>=y_fin+1;y--)
+		 {
+			if(plat.plateau[x_init][y]!=NULL)
+				return -1;
+		 }
 	 }
 	 else if((x_init==x_fin)&&(y_init<y_fin)) //vertical vers le bas
 	 {
-	 for(int y=y_init+1;y<=y_fin-1;y++)
-	 {
-	 if(plateau[x_init][y]!=NULL)
-	 return -1;
-	 }
+		 for(int y=y_init+1;y<=y_fin-1;y++)
+		 {
+			if(plat.plateau[x_init][y]!=NULL)
+				return -1;
+		}
 	 }	
 	 else
-	 return 0;*/
+		return 0;
 }
 
-int testFou(int x_init, int y_init, int x_fin, int y_fin){
-	/*if((y_init<y_fin)&&(x_init<x_fin))//diagonale bas droite
+int testFou(int x_init, int y_init, int x_fin, int y_fin, Plateau plat){
+	if((y_init<y_fin)&&(x_init<x_fin))//diagonale bas droite
 	 {
-	 for(int k=x_init+1;k<=x_fin-1;k++)
-	 {
-	 if(plateau[x_init+k][y_init+k]!=NULL)
-	 return -1;
-	 }
+		 for(int k=x_init+1;k<=x_fin-1;k++)
+		 {
+			 if(plat.plateau[x_init+k][y_init+k]!=NULL)
+				return -1;
+		 }
 	 }
 	 else if((y_init<y_fin)&&(x_init>x_fin)) //diagonale bas gauche
 	 {
-	 for(int k=y_init+1;k<=y_fin-1;k++)
-	 {
-	 if(plateau[x_init-k][y_init+k]!=NULL)
-	 return -1;
-	 }
+		 for(int k=y_init+1;k<=y_fin-1;k++)
+		 {
+			if(plat.plateau[x_init-k][y_init+k]!=NULL)
+				return -1;
+		 }
 	 }
 	 else if((x_init>x_fin)&&(y_init>y_fin))//diagonale haut gauche
 	 {
-	 for(int k=y_init-1;k>=y_fin+1;k--)
-	 {
-	 if(plateau[x_init-k][y_init-k]!=NULL)
-	 return -1;
-	 }
+		 for(int k=y_init-1;k>=y_fin+1;k--)
+		 {
+			if(plat.plateau[x_init-k][y_init-k]!=NULL)
+				return -1;
+		 }
 	 }
 	 else if((x_init<x_fin)&&(y_init>y_fin))//diagonale haut droite
 	 {
-	 for(int k=x_init+1;k<=x_fin-1;k++)
-	 {
-	 if(plateau[x_init+k][y_init-k]!=NULL)
-	 return -1;
-	 }
+		 for(int k=x_init+1;k<=x_fin-1;k++)
+		 {
+			if(plat.plateau[x_init+k][y_init-k]!=NULL)
+				return -1;
+		 }
 	 }	
 	 else
-	 return 0;*/
+		return 0;
 	
 }
 
-int testFouPromu(int x_init, int y_init, int x_fin, int y_fin){
+int testFouPromu(int x_init, int y_init, int x_fin, int y_fin,Plateau plat){
 	if((x_fin==x_init+1)&&(y_fin==y_init))
 		return 0;
 	else if((x_fin==x_init-1)&&(y_fin==y_init))
@@ -279,10 +279,10 @@ int testFouPromu(int x_init, int y_init, int x_fin, int y_fin){
 		return 0;
 	else if((x_fin==x_init)&&(y_fin==y_init-1))
 		return 0;
-	else testFou( x_init, y_init, x_fin, y_fin);
+	else testFou( x_init, y_init, x_fin, y_fin,plat);
 }
 
-int testTourPromue(int x_init, int y_init, int x_fin, int y_fin){
+int testTourPromue(int x_init, int y_init, int x_fin, int y_fin,Plateau plat){
 	if((x_fin==x_init+1)&&(y_fin==y_init+1))
 		return 0;
 	else if((x_fin==x_init-1)&&(y_fin==y_init-1))
@@ -291,10 +291,37 @@ int testTourPromue(int x_init, int y_init, int x_fin, int y_fin){
 		return 0;
 	else if((x_fin==x_init+1)&&(y_fin==y_init-1))
 		return 0;
-	else testTour(x_init, y_init, x_fin, y_fin);
+	else testTour(x_init, y_init, x_fin, y_fin,plat);
 }
 
-int testMouvement(Pion& pion, int x_fin, int y_fin){
+//----------------------Test Chariots-----------------------------------
+int testChariot_J1(int x_init, int y_init, int x_fin, int y_fin,Plateau plat){
+	 if((x_init==x_fin)&&(y_init>y_fin)) //vertical vers le haut
+	 {
+		 for(int y=y_init-1;y>=y_fin+1;y--)
+		 {
+			if(plat.plateau[x_init][y]!=NULL)
+				return -1;
+		 }
+	 }
+	 else return 0;
+}
+
+int testChariot_J2(int x_init, int y_init, int x_fin, int y_fin,Plateau plat){
+	 if((x_init==x_fin)&&(y_init<y_fin)) //vertical vers le bas
+	 {
+		 for(int y=y_init+1;y<=y_fin-1;y++)
+		 {
+			if(plat.plateau[x_init][y]!=NULL)
+				return -1;
+		}
+	 }	
+	 else return 0;
+}
+//----------------------------------------------------------------------
+
+
+int testMouvement(Pion& pion, int x_fin, int y_fin, Plateau plateau){
 	// Je rajoute une sécurité la si ca te dérange pas.
 
 	int x_init = pion.getPositionx();
@@ -313,6 +340,10 @@ int testMouvement(Pion& pion, int x_fin, int y_fin){
 				break;
 				
 			case Chariot:		//Chariot
+				if(proprietaire==1)
+						return testChariot_J1(x_init,y_init,x_fin,y_fin,plateau);
+					else if(proprietaire==2)
+						return testChariot_J2(x_init,y_init,x_fin,y_fin,plateau);
 				break;
 				
 			case Cavalier:		//Cavalier
@@ -341,11 +372,11 @@ int testMouvement(Pion& pion, int x_fin, int y_fin){
 				break;
 				
 			case Fou:		//Fou
-					return testFou(x_init, y_init, x_fin,y_fin);
+					return testFou(x_init, y_init, x_fin,y_fin,plateau);
 				break;
 				
 			case Tour:		//Tour
-					return testTour(x_init, y_init, x_fin,y_fin);
+					return testTour(x_init, y_init, x_fin,y_fin,plateau);
 				break;
 				
 			case Soldat_p:		//Soldat promu
@@ -377,11 +408,11 @@ int testMouvement(Pion& pion, int x_fin, int y_fin){
 				break;
 				
 			case Fou_p:	//Fou promu
-					return testFouPromu(x_init,y_init, x_fin, y_fin);
+					return testFouPromu(x_init,y_init, x_fin, y_fin,plateau);
 				break;
 				
 			case Tour_p:	//Tour promue
-					return testTourPromue(x_init,y_init, x_fin, y_fin);
+					return testTourPromue(x_init,y_init, x_fin, y_fin,plateau);
 				break;
 				
 			case General_Jade:	//General de jade
@@ -426,4 +457,3 @@ int testParachutage(Pion& pion, int x_fin, int y_fin, int joueur_actif, Plateau 
 	else return 0;
 	
 }
-
