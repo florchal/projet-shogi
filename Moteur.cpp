@@ -5,32 +5,45 @@
 
 int Moteur::attaque(Pion& pion, int x_fin, int y_fin)
 {
-	if(pion.getProprietaire() == joueur_actif) //essaie de capturer son propre pion
+	if(plat_mot.getPion(x_fin,y_fin).getProprietaire() == joueur_actif) //lol je testais le pion en mouvement et pas le pion capturé
 		return -1; //pas de friendly fire
 	
-	else 
+	else
 	{
+		//dégager le pion capturé
 		plat_mot.getPion(x_fin,y_fin).setPromotion(false); //dépromouvoir le pion capturé
 		plat_mot.getPion(x_fin,y_fin).retirerPion(); //supprimer ses coordonnées dans la classe pion
-		plat_mot.capture(pion, x_fin, y_fin, joueur_actif); //appel a la fonction capture propre au plateau, ce qui ajoute le pion a la liste des pions capturés et le retire du plateau
-		plat_mot.setPosition(pion,x_fin,y_fin); //place le pion en mouvement à la position voulue sur le plateau
-		pion.setPosition(x_fin, y_fin);//met à jour les coordonnées finales dans la classe pion
+		plat_mot.capture(plat_mot.getPion(x_fin,y_fin), x_fin, y_fin, joueur_actif); //appel a la fonction capture propre au plateau, ce qui ajoute le pion a la liste des pions capturés et le retire du plateau
+		//mouvement normal 
+		plat_mot.plateau[x_fin][y_fin]=new Pion(pion.getPositionx(),pion.getPositiony(),pion.getProprietaire(),pion.getNom(),pion.getVivant());
+		plat_mot.plateau[x_fin][y_fin]->setPromotion(pion.getPromotion());
+		plat_mot.plateau[x_fin][y_fin]->setPosition(x_fin,y_fin);
 		return 0; //attaque ok
 	}
 	
 }
 
 int Moteur::mouvement(Pion& pion, int x_fin, int y_fin)
-{	
-
+{
+    
 	if((testMouvement(pion,x_fin,y_fin,plat_mot)) == 0) //si mouvement légal
 	{
 		std::cout<<"coucou cest nous"<<std::endl;
-		if(plat_mot.plateau[x_fin][y_fin]!= NULL) //mais si case déjà occupée 
-		{	attaque(pion,x_fin,y_fin); //mener attaque //et la on fait pas de return ???? GRRRRRRR x)
+		if(plat_mot.plateau[x_fin][y_fin]!= NULL) //mais si case déjà occupée
+		{	
+			attaque(pion,x_fin,y_fin); //mener attaque //et la on fait pas de return ???? GRRRRRRR x)
+			
+			if((joueur_actif==1)&&(x_fin<=2)) //gestion des promotions cf changements classe Pion 
+			{
+				plat_mot.plateau[x_fin][y_fin]->setPromotion(true);
+			}
+			if((joueur_actif==2)&&(x_fin>=6))
+			{
+				plat_mot.plateau[x_fin][y_fin]->setPromotion(true);
+			}
 			std::cout<<"mais tu es pas censé passer la"<<std::endl;
 			return 0;
-		
+            
 		}
 		else //sinon déplacement normal
 		{
@@ -39,7 +52,16 @@ int Moteur::mouvement(Pion& pion, int x_fin, int y_fin)
 			plat_mot.plateau[x_fin][y_fin]->setPromotion(pion.getPromotion());
 			plat_mot.plateau[x_fin][y_fin]->setPosition(x_fin,y_fin);
 			
-
+			if((joueur_actif==1)&&(x_fin<=2)) //gestion des promotions cf changements classe Pion 
+			{
+				plat_mot.plateau[x_fin][y_fin]->setPromotion(true);
+			}
+			if((joueur_actif==2)&&(x_fin>=6))
+			{
+				plat_mot.plateau[x_fin][y_fin]->setPromotion(true);
+			}
+			
+            
 			return 0;
 		}
 	}
@@ -52,11 +74,11 @@ int Moteur::mouvement(Pion& pion, int x_fin, int y_fin)
 int Moteur::parachutage(Pion& pion, int x_fin, int y_fin)
 {
 	if(testParachutage(pion, x_fin, y_fin, joueur_actif,plat_mot)==0)//si parachutage autorisé
-	{ 
-		if(plat_mot.plateau[x_fin][y_fin]==NULL) //si case libre 
+	{
+		if(plat_mot.plateau[x_fin][y_fin]==NULL) //si case libre
 		{
 			pion.setPosition(x_fin,y_fin); //met a jour les nouvelles coordonnées dans la classe pion
-			plat_mot.parachutage(pion,x_fin,y_fin); //appel a la fonction parachutage du plateau qui doit supprimer le pion de la liste des capturés et le remettre en jeu
+			plat_mot.parachutage(pion,x_fin,y_fin,joueur_actif); //appel a la fonction parachutage du plateau qui doit supprimer le pion de la liste des capturés et le remettre en jeu
 			return 0;
 		}
 	}
@@ -73,26 +95,26 @@ void Moteur::changer_joueur(){
 
 
 /*int Moteur::coup(int x_init, int y_init, int x_fin, int y_fin) //gère tous les coups joués
-{
-	Pion pion = plat_mot.getPion(x_init,y_init);
-	if((plat_mot.plateau[x_init][y_init]!=NULL)&&(pion.getProprietaire()==joueur_actif))
-	{
-		if(!pion.getVivant()) //si on cherche à bouger un pion mort on veut parachuter
-		{
-			parachutage(pion,x_fin,y_fin); 
-			changer_joueur();
-		}
-		if(pion.getVivant()) //si on cherche à bouger un pion vivant c'est un déplacement normal
-		{
-			mouvement(pion,x_fin,y_fin);//Déplacer le pion (return -1 si coup invalide)
-			plat_mot.plateau[x_init][y_init]=NULL;
-			changer_joueur();
-		}
-		return -1; //si aucun des deux :erreur// Ca c'est faux mon loulou ... Quoi qu'il arrive il retourne -1 la ...
-	}	// Manque les return, tu dois renvoyer quelque chose et tu retournes toujours -1 regarde ce que je te propose
-		// Ca explique qu'a chaque fois que tu fais un mouvement le mouvement est invalide mais tu bouges quand meme les pièces.
-		// Le return de la fonction mouvmement est inexploitée. Mais je t'aime bien quand même x)
-}*/
+ {
+ Pion pion = plat_mot.getPion(x_init,y_init);
+ if((plat_mot.plateau[x_init][y_init]!=NULL)&&(pion.getProprietaire()==joueur_actif))
+ {
+ if(!pion.getVivant()) //si on cherche à bouger un pion mort on veut parachuter
+ {
+ parachutage(pion,x_fin,y_fin);
+ changer_joueur();
+ }
+ if(pion.getVivant()) //si on cherche à bouger un pion vivant c'est un déplacement normal
+ {
+ mouvement(pion,x_fin,y_fin);//Déplacer le pion (return -1 si coup invalide)
+ plat_mot.plateau[x_init][y_init]=NULL;
+ changer_joueur();
+ }
+ return -1; //si aucun des deux :erreur// Ca c'est faux mon loulou ... Quoi qu'il arrive il retourne -1 la ...
+ }	// Manque les return, tu dois renvoyer quelque chose et tu retournes toujours -1 regarde ce que je te propose
+ // Ca explique qu'a chaque fois que tu fais un mouvement le mouvement est invalide mais tu bouges quand meme les pièces.
+ // Le return de la fonction mouvmement est inexploitée. Mais je t'aime bien quand même x)
+ }*/
 int Moteur::coup(int x_init, int y_init, int x_fin, int y_fin) //gère tous les coups joués
 {
 	Pion pion = plat_mot.getPion(x_init,y_init);
@@ -100,7 +122,7 @@ int Moteur::coup(int x_init, int y_init, int x_fin, int y_fin) //gère tous les 
 	{
 		if(!pion.getVivant()) //si on cherche à bouger un pion mort on veut parachuter
 		{
-			parachutage(pion,x_fin,y_fin); 
+			parachutage(pion,x_fin,y_fin);
 			changer_joueur();
 			return 0;
 		}
@@ -115,15 +137,15 @@ int Moteur::coup(int x_init, int y_init, int x_fin, int y_fin) //gère tous les 
 					joueur_actif=1;
 				return 0;
 			}
-			else 
+			else
 				return -1;
 			
 		}
-		else 
+		else
 		{
 			return -1;
 		}
-	}	
+	}
 	
 }
 
@@ -132,7 +154,7 @@ Moteur::Moteur(){
 	bool partie_active = true;
 	Plateau plat_jeu = Plateau();
 	printf("plateau initialisé\n");
-	this->joueur_actif=1 ; // je pense que ca ca devrait marcher. 
+	this->joueur_actif=1 ; // je pense que ca ca devrait marcher.
 	partie_active=true;
 	//----------------------------------------------------------
 	for(int i = 0; i < 9; i++) //création des soldats du joueur 1
@@ -150,7 +172,7 @@ Moteur::Moteur(){
 	
 	//création des fous
 	plat_jeu.plateau[1][7]=new Pion(1,7,1,Fou,true);
-	plat_jeu.plateau[7][1]=new Pion(7,1,2,Fou,true); 
+	plat_jeu.plateau[7][1]=new Pion(7,1,2,Fou,true);
 	
 	//création des Generaux
 	plat_jeu.plateau[4][8]=new Pion(4,8,1,General,true);
@@ -190,4 +212,9 @@ Moteur::Moteur(){
 				std::cout<<i<<","<<j<<"    "<<plat_mot.plateau[i][j]->getNom()<<"    "<<plat_mot.plateau[i][j]->getProprietaire()<<std::endl;
 		}
 	}
+}
+int Moteur::getJoueur()
+{
+    return joueur_actif;
+
 }
