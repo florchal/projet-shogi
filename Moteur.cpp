@@ -23,7 +23,7 @@ int Moteur::attaque(Pion& pion, int x_fin, int y_fin)
 int Moteur::mouvement(Pion& pion, int x_fin, int y_fin)
 {	
 
-	if((testMouvement(pion,x_fin,y_fin)) == 0) //si mouvement légal
+	if((testMouvement(pion,x_fin,y_fin,plat_mot)) == 0) //si mouvement légal
 	{
 		std::cout<<"coucou cest nous"<<std::endl;
 		if(plat_mot.plateau[x_fin][y_fin]!= NULL) //mais si case déjà occupée 
