@@ -13,21 +13,23 @@
 
 //Si la case d'arrivée est occupée par une autre piece (amie ou ennemie) c'est à la classe Moteur de réagir
 //on ne teste ici que la portée du déplacement
-		
-	int testMouvement(Pion&,int,int);
-	int testGeneralOr_J1(int,int,int,int);
-	int testGeneralOr_J2(int,int,int,int);
-	int testGeneral(int,int,int,int);
-	int testSoldat_J1(int,int,int,int);
-	int testSoldat_J2(int,int,int,int);
-	int testCavalier_J1(int, int, int,int);
-	int testCavalier_J2(int, int, int,int);
-	int testGeneralArgent_J1(int,int,int,int);
-	int testGeneralArgent_J2(int,int,int,int);
-	int testParachutage(Pion&,int,int,int,Plateau);
-	int testTour(int,int,int,int);
-	int testTourPromue(int,int,int,int);
-	int testFou(int,int,int,int);
-	int testFouPromu(int,int,int,int);
-	
+
+int testMouvement(Pion&,int,int,Plateau);
+int testGeneralOr_J1(int,int,int,int);
+int testGeneralOr_J2(int,int,int,int);
+int testGeneral(int,int,int,int);
+int testSoldat_J1(int,int,int,int);
+int testSoldat_J2(int,int,int,int);
+int testCavalier_J1(int, int, int,int);
+int testCavalier_J2(int, int, int,int);
+int testGeneralArgent_J1(int,int,int,int);
+int testGeneralArgent_J2(int,int,int,int);
+int testParachutage(Pion&,int,int,int,Plateau);
+int testTour(int,int,int,int,Plateau);
+int testTourPromue(int,int,int,int,Plateau);
+int testFou(int,int,int,int,Plateau);
+int testFouPromu(int,int,int,int,Plateau);
+int testChariot_J1(int,int,int,int,Plateau);
+int testChariot_J2(int,int,int,int,Plateau);
+
 #endif
